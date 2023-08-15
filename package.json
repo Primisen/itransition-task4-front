@@ -20,6 +20,7 @@
     "crypto-js": "^4.1.1",
     "css-select": "^5.1.0",
     "dotenv": "^16.3.1",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "os": "^0.1.2",
@@ -51,7 +52,6 @@
       "react-app/jest"
     ]
   },
-
   "browserslist": {
     "production": [
       ">0.2%",

@@ -28,6 +28,7 @@ function App() {
         } else {
             return (
                 <>
+                    <a href="/users">Users</a>
                     <a onClick={refreshPage} href="/logout" >Logout</a>
                 </>
             )
@@ -42,8 +43,6 @@ function App() {
 
                     <section id="navigation">
                         <a href="/">Home</a>
-                        <a href="/users">Users</a>
-
 
                         {auth()}
                     </section>

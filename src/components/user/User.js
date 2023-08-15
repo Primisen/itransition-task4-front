@@ -1,21 +1,17 @@
 import React, {useEffect, useState} from "react";
 import Cookies from "universal-cookie";
-import Delete from "./Delete";
-import Block from "./Block";
-import Unblock from "./Unblock.js";
 import Table from 'react-bootstrap/Table';
 import moment from "moment";
-import {ButtonGroup} from "react-bootstrap";
+import ToolBar from "./ToolBar";
 
 const url = "http://localhost:4001/users";
 const cookies = new Cookies();
 
 export default function User() {
 
-    const selector = document.getElementsByClassName('select-all')[0];
     const selectItems = document.getElementsByClassName('acc-item');
 
-    function changeListner($event) {
+    function selectAll($event) {
         const isSelectorChecked = $event.target.checked;
         if (isSelectorChecked) {
             for (let item of selectItems) {
@@ -31,7 +27,6 @@ export default function User() {
     const [users, setUsers] = useState([]);
 
     const headers = {'Authorization': 'Bearer ' + cookies.get("TOKEN")};
-
 
     function fetchUsers(headers) {
         fetch(url, {headers})
@@ -50,17 +45,13 @@ export default function User() {
         <div>
             <h1 className="text-center">User Component</h1>
 
-            <ButtonGroup aria-label="Basic example">
-                <Unblock/>
-                <Block/>
-                <Delete/>
-            </ButtonGroup>
+            <ToolBar/>
 
             <Table Users>
                 <thead>
                 <tr>
                     <th>
-                        <input onClick={changeListner} className="select-all" type="checkbox" name="acs1"/>
+                        <input onClick={selectAll} className="select-all" type="checkbox" name="acs1"/>
                     </th>
                     <th>Id</th>
                     <th>Name</th>

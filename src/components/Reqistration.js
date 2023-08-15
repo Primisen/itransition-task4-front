@@ -10,7 +10,6 @@ export default function Register() {
     const [register, setRegister] = useState(false);
 
     const handleSubmit = (e) => {
-        // set configurations
         const configuration = {
             method: "post",
             url: "http://localhost:4001/registration",
@@ -21,8 +20,6 @@ export default function Register() {
             },
         };
 
-        // make the API call
-        // make the API call
         axios(configuration)
             .then((result) => {
                 setRegister(true);
@@ -30,10 +27,7 @@ export default function Register() {
             .catch((error) => {
                 error = new Error();
             });
-        // prevent the form from refreshing the whole page
         e.preventDefault();
-        // make a popup alert showing the "submitted" text
-        // alert("Submited");
     }
 
     return (
@@ -42,14 +36,12 @@ export default function Register() {
             <h2>Register</h2>
             <Form onSubmit={(e)=>handleSubmit(e)}>
 
-                {/* display success message */}
                 {register ? (
                     <p className="text-success">You Are Registered Successfully</p>
                 ) : (
                     <p className="text-danger">You Are Not Registered</p>
                 )}
 
-                {/*name*/}
                 <Form.Group controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
@@ -60,7 +52,6 @@ export default function Register() {
                         placeholder="Enter your name" />
                 </Form.Group>
 
-                {/* email */}
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
@@ -82,7 +73,6 @@ export default function Register() {
                         placeholder="Password" />
                 </Form.Group>
 
-                {/* submit button */}
                 <Button
                     variant="primary"
                     type="submit"

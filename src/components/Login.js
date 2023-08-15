@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Form, Button} from "react-bootstrap";
 import axios from "axios";
 import Cookies from "universal-cookie";
-
+import JwtDecode from "jwt-decode";
 
 export default function Login() {
 
@@ -14,7 +14,6 @@ export default function Login() {
 
     const handleSubmit = (e) => {
 
-        // set configurations
         const configuration = {
             method: "post",
             url: "http://localhost:4001/login",//
@@ -24,24 +23,22 @@ export default function Login() {
             },
         };
 
-        // make the API call
         axios(configuration)
             .then((result) => {
                 setSignup(true);
-                // set the cookie
+
                 cookies.set("TOKEN", result.data.token, {
                     path: "/",
                 });
+                const user = JwtDecode(result.data.token);
+                cookies.set("USER_ID", user.id);
                 window.location.href = "/users";
             })
             .catch((error) => {
                 error = new Error();
             });
 
-        // prevent the form from refreshing the whole page
         e.preventDefault();
-        // // make a popup alert showing the "submitted" text
-        // alert("Submited");
     }
 
     return (
@@ -49,7 +46,6 @@ export default function Login() {
             <h2>Login</h2>
             <Form onSubmit={(e) => handleSubmit(e)}>
 
-                {/* display success message */}
                 {signup ? (
                     <p className="text-success">You Are Logged in Successfully</p>
                 ) : (
@@ -68,7 +64,6 @@ export default function Login() {
                     />
                 </Form.Group>
 
-                {/* password */}
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
@@ -80,7 +75,6 @@ export default function Login() {
                     />
                 </Form.Group>
 
-                {/* submit button */}
                 <Button
                     variant="primary"
                     type="submit"
