@@ -2,7 +2,7 @@ import React from "react";
 import Cookies from "universal-cookie";
 import {Button, ButtonGroup} from "react-bootstrap";
 
-const url = "http://localhost:4001/users";
+const url = "http://34.116.171.214:4001/users";
 const cookies = new Cookies();
 export default function ToolBar() {
 

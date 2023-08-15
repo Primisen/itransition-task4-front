@@ -12,7 +12,7 @@ export default function Register() {
     const handleSubmit = (e) => {
         const configuration = {
             method: "post",
-            url: "http://localhost:4001/registration",
+            url: "http://34.116.171.214:4001/registration",
             data: {
                 name,
                 login,

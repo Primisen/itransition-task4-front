@@ -16,7 +16,7 @@ export default function Login() {
 
         const configuration = {
             method: "post",
-            url: "http://localhost:4001/login",//
+            url: "http://34.116.171.214:4001/login",//
             data: {
                 login,
                 password,
