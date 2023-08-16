@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Form, Button } from "react-bootstrap";
+import {Form, Button} from "react-bootstrap";
 import axios from "axios";
 
 export default function Register() {
@@ -7,7 +7,7 @@ export default function Register() {
     const [name, setName] = useState("");
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
-    const [register, setRegister] = useState(false);
+    const [registerMessage, setRegisterMessage] = useState("");
 
     const handleSubmit = (e) => {
         const configuration = {
@@ -22,10 +22,10 @@ export default function Register() {
 
         axios(configuration)
             .then((result) => {
-                setRegister(true);
+                setRegisterMessage(result.data);
             })
             .catch((error) => {
-                error = new Error();
+                setRegisterMessage(error.response.data);
             });
         e.preventDefault();
     }
@@ -33,14 +33,10 @@ export default function Register() {
     return (
 
         <>
-            <h2>Register</h2>
-            <Form onSubmit={(e)=>handleSubmit(e)}>
+            <h2>Registration</h2>
+            <Form onSubmit={(e) => handleSubmit(e)}>
 
-                {register ? (
-                    <p className="text-success">You Are Registered Successfully</p>
-                ) : (
-                    <p className="text-danger">You Are Not Registered</p>
-                )}
+                <p>{registerMessage}</p>
 
                 <Form.Group controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
@@ -49,7 +45,7 @@ export default function Register() {
                         name="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="Enter your name" />
+                        placeholder="Enter your name"/>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicEmail">
@@ -59,7 +55,7 @@ export default function Register() {
                         name="login"
                         value={login}
                         onChange={(e) => setLogin(e.target.value)}
-                        placeholder="Enter email" />
+                        placeholder="Enter email"/>
                 </Form.Group>
 
                 {/* password */}
@@ -70,7 +66,7 @@ export default function Register() {
                         name="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password" />
+                        placeholder="Password"/>
                 </Form.Group>
 
                 <Button
